@@ -28,12 +28,8 @@ export class RegisterComponent implements OnInit {
   submit(data: Object) {
     this._service.signIn(data).subscribe(
       res => {
-        console.log(res);
-        localStorage.setItem('user',res)
+        localStorage.setItem('user',res.token)
       },
-      err => {
-        console.log(err);
-      }
     )
   }
 

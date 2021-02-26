@@ -1,1 +1,59 @@
-<p>tasks works!</p>
+<div class="container">
+    <h1 class="text-center mt-5 mb-5 fw-light">Create Task</h1>
+    <form class="m-autow-75" [formGroup]="form" (submit)="submit(form.value)">
+        <div class="mb-3">
+            <input formControlName="title" type="text" placeholder="Name" class="form-control">
+        </div>
+        <div class="alert alert-danger" *ngIf="form.get('title')?.hasError('required') && form.get('title')?.touched">
+            The Name Is Required
+        </div>
+        <div class="alert alert-danger" *ngIf="form.get('title')?.hasError('minlength') && form.get('title')?.touched">
+            The Name Must Be Longer Than 5 Characters
+        </div>
+        <div class="mb-3">
+            <textarea formControlName="content" type="email" placeholder="Content" class="form-control"></textarea>
+        </div>
+        <div class="alert alert-danger" *ngIf="form.get('content')?.hasError('required') && form.get('content')?.touched">
+            The Content Is Required
+        </div>
+        <div class="alert alert-danger" *ngIf="form.get('content')?.hasError('minlength') && form.get('content')?.touched">
+            The Content Must Be Longer Than 5 Characters
+        </div>
+
+        <button type="submit" class="w-25 m-auto btn btn-outline-primary">
+            Create
+        </button>
+
+        <div *ngIf="error" class="alert alert-danger">
+            Error By Creating The Task
+        </div>
+    </form> 
+    <table class="table table-dark table-striped bg-dark mt-5">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center">Name</th>
+            <th scope="col" class="text-center">Content</th>
+            <th scope="col">Done</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of tasks">
+            <td class="text-center">{{ item.title }}</td>
+            <td class="col-5 text-center">{{ item.content }}</td>
+            <td>{{ item.done ? "Done" : "Not Done" }}</td>
+            <td>
+                <button (click)="delete(item._id)" class="btn btn-danger">
+                    Delete
+                </button>
+                <a routerLink="../edit/{{ item._id }}" class="btn btn-primary mx-3">
+                    Edit
+                </a>
+                <button *ngIf="!item.done" (click)="done(item._id)" class="btn btn-success">
+                    Done
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</div>

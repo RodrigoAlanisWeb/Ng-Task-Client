@@ -27,12 +27,8 @@ export class LoginComponent implements OnInit {
   submit(data: Object) {
     this._service.login(data).subscribe(
       res => {
-        console.log(res);
-        localStorage.setItem('user',res)
+        localStorage.setItem('user',res.token)
       },
-      err => {
-        console.log(err);
-      }
     )
   }
 

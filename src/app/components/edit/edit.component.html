@@ -1,0 +1,28 @@
+<h1 class="text-center mt-5 mb-5 fw-light">Create Task</h1>
+    <form class="m-auto w-50" [formGroup]="form" (submit)="submit(form.value)">
+        <div class="mb-3">
+            <input formControlName="title" type="text" placeholder="Name" class="form-control">
+        </div>
+        <div class="alert alert-danger" *ngIf="form.get('title')?.hasError('required') && form.get('title')?.touched">
+            The Name Is Required
+        </div>
+        <div class="alert alert-danger" *ngIf="form.get('title')?.hasError('minlength') && form.get('title')?.touched">
+            The Name Must Be Longer Than 5 Characters
+        </div>
+        <div class="mb-3">
+            <textarea formControlName="content" type="email" placeholder="Content" class="form-control"></textarea>
+        </div>
+        <div class="alert alert-danger" *ngIf="form.get('content')?.hasError('required') && form.get('content')?.touched">
+            The Content Is Required
+        </div>
+        <div class="alert alert-danger" *ngIf="form.get('content')?.hasError('minlength') && form.get('content')?.touched">
+            The Content Must Be Longer Than 5 Characters
+        </div>
+
+        <button type="submit" class="w-25 m-auto btn btn-outline-primary">
+            Update
+        </button>
+        <div *ngIf="error" class="alert alert-danger">
+            Error By Updating The Task
+        </div>
+</form> 
