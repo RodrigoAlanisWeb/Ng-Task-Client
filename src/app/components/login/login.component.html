@@ -1,0 +1,29 @@
+<h1 class="text-center mt-5 fw-light">
+    Login Form
+</h1>
+
+<form (submit)="submit(form.value)" [formGroup]="form" class="mt-5 w-50 m-auto">
+    <div class="mb-3">
+        <input formControlName="email" type="email" placeholder="Email" class="form-control">
+    </div>
+    <div class="alert alert-danger" *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched">
+        The Email Is Required
+    </div>
+    <div class="alert alert-danger" *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched">
+        The Email Is Invalid
+    </div>
+    <div class="mb-3">
+        <input formControlName="password" type="password" placeholder="Password" class="form-control">
+    </div>
+    <div class="alert alert-danger" *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched">
+        The Password Is Required
+    </div>
+    <div class="alert alert-danger"
+        *ngIf="form.get('password')?.hasError('minlength') && form.get('password')?.touched">
+        The Password Must Be Longer Than 5 Characters
+    </div>
+
+    <button class="btn btn-outline-success">
+        Register
+    </button>
+</form>
